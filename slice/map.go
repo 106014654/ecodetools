@@ -1,5 +1,13 @@
 package slice
 
+func Map[Src any, Dst any](src []Src, m func(idx int, src Src) Dst) []Dst {
+	data := make([]Dst, len(src))
+	for k, v := range src {
+		data[k] = m(k, v)
+	}
+	return data
+}
+
 func makeMap[T comparable](src []T) map[T]struct{} {
 	var dataMap = make(map[T]struct{}, len(src))
 	for _, v := range src {
